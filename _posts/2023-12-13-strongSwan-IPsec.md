@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "Configure IPsec VPN in an Ubuntu VM using strongSwan"
-author: Sriram
+author: Sriram H. Iyer
 ---
 
 ## What is strongSwan?
