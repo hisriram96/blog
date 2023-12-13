@@ -4,11 +4,9 @@ title: "Configure IPsec VPN in an Ubuntu VM using strongSwan"
 author: Sriram
 ---
 
-# Configure IPsec VPN in an Ubuntu VM using strongSwan
+## What is strongSwan?
 
-## What is StraongSwan?
-
-StrongSwan is open-source IPsec-based VPN solution. You could use StrongSwan for configuring VPN in Linux, UNIX, and BSD Operating Systems.
+strongSwan is open-source package for IPsec VPN. You could use strongSwan for configuring VPN in Linux, UNIX, and BSD Operating Systems.
 
 In this example, we will configure an IPsec VPN between two Ubuntu VMs. However, same configuration can be applied for RedHat and other distos.
 
@@ -16,7 +14,7 @@ Please note that the configuration is done on two Azure VMs which are in differe
 
 ## Network Architecture
 
-Before we configure IPsec VPN using StrongSwan, we need to deploy Azure VMs with Public IPs which are in different VNets and there is no connecitivity between VNets in any manner. You could perform this excerise in AWS as well by creating two EC2 instances in different VPCs
+Before we configure IPsec VPN using strongSwan, we need to deploy Azure VMs with Public IPs which are in different VNets and there is no connecitivity between VNets in any manner. You could perform this excerise in AWS as well by creating two EC2 instances in different VPCs
 
 
 
@@ -40,7 +38,7 @@ Since we deployed Azure VMs, we must also enable IP forwarding in the vNIC of th
 
 Please note that enabling IP forwarding in the vNIC of the Azure VM is an additional step as it does does not enable IP forwarding in the guest OS so we still need to enable IP forwarding in Ubuntu OS.
 
-## Configuring StringSwan
+## Configuring strongSwan
 
 With our network infrastructure ready and IP forwarding enabled in the OS and in VNIC, we could proceed with the configuration of IPsec VPN.
 
