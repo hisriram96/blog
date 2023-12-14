@@ -105,4 +105,15 @@ With our network infrastructure ready and IP forwarding enabled in the OS and in
    sudo systemctl status ipsec
    ```
 
+## Verification of IPsec
+
+You could verify if the IPsec is established by executing the command ```sudo ipsec status```. You could stop and start the IPsec using ```sudo ipsec stop``` and ```sudo ipsec start``` commands without having to do anything in strongSwan process.
+
+In case the IPsec is not up, you could troubleshoot with the help of IPsec logs by using the command below.
+
+```
+sudo cat /var/log/syslog | grep "ipsec"
+```
+
+
 <link rel="alternate" type="application/rss+xml"  href="{{ site.url }}/feed.xml" title="{{ site.title }}">
