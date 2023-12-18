@@ -10,14 +10,13 @@ strongSwan is open-source package for IPsec VPN. You could use strongSwan for co
 
 In this example, we will configure an IPsec VPN between two Ubuntu VMs. However, same configuration can be applied for RedHat and other distos.
 
-Please note that the configuration is done on two Azure VMs which are in different VNets and there is no connecitivity between VNets in any manner. So, before proceeding with rest of the Blog, please create two Azure VMs in different VNets with public IPs. You could perform this excerise in AWS as well by creating two EC2 instances in different VPCs
+Please note that the configuration is done on two Azure VMs which are in different VNets and there is no connecitivity between VNets in any manner. So, before proceeding with rest of the Blog, please create two Azure VMs in different VNets with public IPs. You could perform this excerise in AWS as well by creating two EC2 instances in different VPCs.
 
 ## Network Architecture
 
 Before we configure IPsec VPN using strongSwan, we need to deploy Azure VMs with Public IPs which are in different VNets and there is no connecitivity between VNets in any manner. You could perform this excerise in AWS as well by creating two EC2 instances in different VPCs.
 
-![network-diagram](https://github.com/hisriram96/blog/assets/56336513/e96227a5-ada4-45b9-86c1-37c3826ac269)
-
+<img width="1184" alt="image" src="![network-diagram](https://github.com/hisriram96/blog/assets/56336513/a4b5d065-fbcd-4487-98e8-d241b1f99b29)">
 
 ## Enable IP forwarding
 
