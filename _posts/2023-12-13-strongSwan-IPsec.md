@@ -54,7 +54,11 @@ With our network infrastructure ready and IP forwarding enabled in the OS and in
    sudo apt-get install libstrongswan-extra-plugins -y
    ```
 
-2. Configure IPsec VPN by editing the ipsec.conf file.
+   Example:
+   
+   <img width="725" alt="image" src="https://github.com/hisriram96/blog/assets/56336513/8a52568b-694a-4b9c-90bc-3aa6b84927d7">
+
+3. Configure IPsec VPN by editing the ipsec.conf file.
 
    ```
    sudo vi /etc/ipsec.conf
@@ -63,30 +67,34 @@ With our network infrastructure ready and IP forwarding enabled in the OS and in
    Contents of the ```ipsec.conf``` file.
 
    ```
-	config setup
-		charondebug="all"
-		uniqueids=yes
-	conn tunnel21
-		type=tunnel
-		left=<Private_IP_address_of_the_VM>
-		leftsubnet=<Local_IP_prefix>
-		right=<VPN_peer_IP_address>
-		rightsubnet=<Remote_IP_prefix>
-		keyexchange=ikev2
-		keyingtries=%forever
-		authby=psk
-		ike=aes256-sha256-modp1024!
-		esp=aes256-sha256!
-		keyingtries=%forever
-		auto=start
-		dpdaction=restart
-		dpddelay=45s
-		dpdtimeout=45s
-		ikelifetime=28800s
-		lifetime=27000s
-		lifebytes=102400000
+   config setup
+		   charondebug="all"
+		   uniqueids=yes
+   conn tunnel21
+		   type=tunnel
+		   left=<Private_IP_address_of_the_VM>
+		   leftsubnet=<Local_IP_prefix>
+		   right=<VPN_peer_IP_address>
+		   rightsubnet=<Remote_IP_prefix>
+		   keyexchange=ikev2
+		   keyingtries=%forever
+		   authby=psk
+		   ike=aes256-sha256-modp1024!
+		   esp=aes256-sha256!
+		   keyingtries=%forever
+		   auto=start
+		   dpdaction=restart
+		   dpddelay=45s
+		   dpdtimeout=45s
+		   ikelifetime=28800s
+		   lifetime=27000s
+		   lifebytes=102400000
    ```
 
+   Example:
+
+   <img width="287" alt="image" src="https://github.com/hisriram96/blog/assets/56336513/708c0939-4f6e-4236-9ea7-d5b3c2fa4a35">
+   
 5. Configure pre-shared key for VPN in ipsec.secrets file.
 
    ```
@@ -100,6 +108,10 @@ With our network infrastructure ready and IP forwarding enabled in the OS and in
    ```
 
    Please make sure that the same pre-shared key is configured on both IPsec peers. Otherwise, VPN will be down.
+
+   Example:
+
+   <img width="328" alt="image" src="https://github.com/hisriram96/blog/assets/56336513/f9f23e3b-4bc3-401b-b66a-45b83cbab3f9">
 
 7. Restart the strongSwan process.
 
