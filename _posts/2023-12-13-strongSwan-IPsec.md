@@ -34,6 +34,10 @@ sudo sed -i 's/#net.ipv6.conf.all.forwarding=1/net.ipv6.conf.all.forwarding=1/g'
 sudo sysctl -p
 ```
 
+Example:
+
+<img width="724" alt="image" src="https://github.com/hisriram96/blog/assets/56336513/9a2080c1-957a-4ef6-a455-f04e3899cee0">
+
 Since we deployed Azure VMs, we must also enable IP forwarding in the vNIC of the Azure VMs.
 
 Please note that enabling IP forwarding in the vNIC of the Azure VM is an additional step as it does does not enable IP forwarding in the guest OS so we still need to enable IP forwarding in Ubuntu OS.
