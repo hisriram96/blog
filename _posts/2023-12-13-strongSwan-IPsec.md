@@ -6,7 +6,7 @@ author: Sriram H. Iyer
 
 ## What is strongSwan?
 
-strongSwan is open-source package for IPsec VPN. You could use strongSwan for configuring VPN in Linux, UNIX, and BSD Operating Systems.
+[strongSwan](https://docs.strongswan.org/docs/5.9/howtos/introduction.html) is open-source package for IPsec VPN. You could use strongSwan for configuring VPN in Linux, UNIX, and BSD Operating Systems.
 
 In this example, we will configure an IPsec VPN between two Ubuntu VMs. However, same configuration can be applied for RedHat and other distos.
 
