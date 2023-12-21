@@ -124,6 +124,10 @@ With our network infrastructure ready and IP forwarding enabled in the OS and in
    sudo systemctl status ipsec
    ```
 
+   Example:
+
+   <img width="901" alt="image" src="https://github.com/hisriram96/blog/assets/56336513/a604f765-08a1-4a44-8904-0219863772e3">
+
 ## Verification of IPsec
 
 You could verify if the IPsec is established by executing the command ```sudo ipsec status```.
