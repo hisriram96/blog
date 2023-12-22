@@ -4,13 +4,16 @@
   <xsl:template match="/">
     <html>
       <head>
+        <meta name="color-scheme" content="light dark">
         <title><xsl:value-of select="rss/channel/title"/></title>
       </head>
       <body>
-        <h1><xsl:value-of select="rss/channel/title"/></h1>
-        <ul>
-          <xsl:apply-templates select="rss/channel/item"/>
-        </ul>
+        <pre style="word-wrap: break-word; white-space: pre-wrap;">
+          <h1><xsl:value-of select="rss/channel/title"/></h1>
+          <ul>
+            <xsl:apply-templates select="rss/channel/item"/>
+          </ul>
+        </pre>
       </body>
     </html>
   </xsl:template>
