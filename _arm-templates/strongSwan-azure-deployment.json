@@ -184,14 +184,9 @@
                 "tier": "Regional"
             },
             "properties": {
-                "ipAddress": "20.127.45.124",
                 "publicIPAddressVersion": "IPv4",
-                "publicIPAllocationMethod": "Static",
+                "publicIPAllocationMethod": "Dynamic",
                 "idleTimeoutInMinutes": 4,
-                "dnsSettings": {
-                    "domainNameLabel": "[parameters('publicIPAddresses_test_ip_1_name')]",
-                    "fqdn": "[concat(parameters('publicIPAddresses_test_ip_1_name'), '.eastus.cloudapp.azure.com')]"
-                },
                 "ipTags": [],
                 "ddosSettings": {
                     "protectionMode": "VirtualNetworkInherited"
@@ -208,9 +203,8 @@
                 "tier": "Regional"
             },
             "properties": {
-                "ipAddress": "172.191.228.206",
                 "publicIPAddressVersion": "IPv4",
-                "publicIPAllocationMethod": "Static",
+                "publicIPAllocationMethod": "Dynamic",
                 "idleTimeoutInMinutes": 4,
                 "ipTags": []
             }
@@ -275,23 +269,10 @@
                 },
                 "osProfile": {
                     "computerName": "[parameters('virtualMachines_testhubvm1_name')]",
-                    "adminUsername": "azureuser",
-                    "linuxConfiguration": {
-                        "disablePasswordAuthentication": false,
-                        "provisionVMAgent": true,
-                        "patchSettings": {
-                            "patchMode": "AutomaticByPlatform",
-                            "automaticByPlatformSettings": {
-                                "rebootSetting": "IfRequired",
-                                "bypassPlatformSafetyChecksOnUserSchedule": false
-                            },
-                            "assessmentMode": "ImageDefault"
-                        },
-                        "enableVMAgentPlatformUpdates": false
-                    },
+                    "adminUsername": "adminUsername",
+                    "adminPassword": "adminPassword",
                     "secrets": [],
-                    "allowExtensionOperations": true,
-                    "requireGuestProvisionSignal": true
+                    "allowExtensionOperations": true
                 },
                 "securityProfile": {
                     "uefiSettings": {
@@ -355,23 +336,10 @@
                 },
                 "osProfile": {
                     "computerName": "[parameters('virtualMachines_testspokevm1_name')]",
-                    "adminUsername": "azureuser",
-                    "linuxConfiguration": {
-                        "disablewordAuthentication": false,
-                        "provisionVMAgent": true,
-                        "patchSettings": {
-                            "patchMode": "AutomaticByPlatform",
-                            "automaticByPlatformSettings": {
-                                "rebootSetting": "IfRequired",
-                                "byPlatformSafetyChecksOnUserSchedule": false
-                            },
-                            "assessmentMode": "ImageDefault"
-                        },
-                        "enableVMAgentPlatformUpdates": false
-                    },
+                    "adminUsername": "adminUsername",
+                    "adminPassword": "adminPassword",
                     "secrets": [],
-                    "allowExtensionOperations": true,
-                    "requireGuestProvisionSignal": true
+                    "allowExtensionOperations": true
                 },
                 "securityProfile": {
                     "uefiSettings": {
@@ -435,23 +403,10 @@
                 },
                 "osProfile": {
                     "computerName": "[parameters('virtualMachines_testspokevm2_name')]",
-                    "adminUsername": "azureuser",
-                    "linuxConfiguration": {
-                        "disablewordAuthentication": false,
-                        "provisionVMAgent": true,
-                        "patchSettings": {
-                            "patchMode": "AutomaticByPlatform",
-                            "automaticByPlatformSettings": {
-                                "rebootSetting": "IfRequired",
-                                "bypassPlatformSafetyChecksOnUserSchedule": false
-                            },
-                            "assessmentMode": "ImageDefault"
-                        },
-                        "enableVMAgentPlatformUpdates": false
-                    },
+                    "adminUsername": "adminUsername",
+                    "adminPassword": "adminPassword",
                     "secrets": [],
-                    "allowExtensionOperations": true,
-                    "requireGuestProvisionSignal": true
+                    "allowExtensionOperations": true
                 },
                 "securityProfile": {
                     "uefiSettings": {
