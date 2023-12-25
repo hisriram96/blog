@@ -8,15 +8,15 @@ author: Sriram H. Iyer
 
 [strongSwan](https://docs.strongswan.org/docs/5.9/howtos/introduction.html) is an open-source package for IPsec VPN. You could use strongSwan for configuring VPN in Linux, UNIX, and BSD Operating Systems.
 
-In this example, we will configure an IPsec VPN between two Ubuntu VMs. However, same configuration can be applied for RedHat and other distos.
+In this example, we will configure an IPsec VPN in an Ubuntu VM. However, same configuration can be applied for RedHat and other distos.
 
-Please note that the configuration is done on two Azure VMs which are in different VNets and there is no connecitivity between VNets in any manner. So, before proceeding with rest of the Blog, please create two Azure VMs in different VNets with public IPs. You could perform this excerise in AWS as well by creating two EC2 instances in different VPCs.
+Please note that the IPsec VPN is setup between an Azure VM and Azure Virtual Network Gateway which are in different VNets and there is no connecitivity between VNets in any manner. So, before proceeding with rest of the Blog, please create Azure VMs and Virtual Network Gateway in different VNets with public IPs. You could perform this excerise in AWS as well by creating EC2 instances and Virtual Private Gateway in different VPCs.
 
 ## Network Architecture
 
 Before we configure IPsec VPN using strongSwan, we need to deploy Azure VMs with Public IPs which are in different VNets and there is no connecitivity between VNets in any manner. You could perform this excerise in AWS as well by creating two EC2 instances in different VPCs.
 
-![network-diagram](https://github.com/hisriram96/blog/assets/56336513/67970344-a68d-4eb5-9a63-af9b14a65975)
+![network-diagram]([https://github.com/hisriram96/blog/assets/56336513/67970344-a68d-4eb5-9a63-af9b14a65975](https://github.com/hisriram96/blog/blob/5df01f5b51ab2174abeaf1c97816be4fe6a161c7/_pictures/strongSwan-network-diagram.png))
 
 [![Deploy to Azure](https://aka.ms/deploytoazurebutton)](https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2Fhisriram96%2Fblog%2Fmain%2F_arm-templates%2FstrongSwan-azure-deployment.json)
 
