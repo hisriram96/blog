@@ -15,12 +15,10 @@
             "type": "String"
         },
         "adminUsername": {
-            "value": "value",
-            "type": "String"
+            "value": "String"
         },
         "adminPassword": {
-            "value": "value",
-            "type": "String"
+            "value": "String"
         },
         "virtualMachines_testhubvm1_name": {
             "defaultValue": "testhubvm1",
@@ -50,14 +48,6 @@
             "defaultValue": "testhubvm1193",
             "type": "String"
         },
-        "virtualNetworkGateways_testvng2_name": {
-            "defaultValue": "testvng2",
-            "type": "String"
-        },
-        "connections_testconnectiontovnet1_name": {
-            "defaultValue": "testconnectiontovnet1",
-            "type": "String"
-        },
         "networkInterfaces_testspokevm1525_name": {
             "defaultValue": "testspokevm1525",
             "type": "String"
@@ -78,9 +68,16 @@
             "defaultValue": "testspokensg2",
             "type": "String"
         },
-        "presharedkey": {
-            "value": "value",
+        "virtualNetworkGateways_testvng2_name": {
+            "defaultValue": "testvng2",
             "type": "String"
+        },
+        "connections_testconnectiontovnet1_name": {
+            "defaultValue": "testconnectiontovnet1",
+            "type": "String"
+        },
+        "presharedkey": {
+            "value": "String"
         }
     },
     "variables": {},
