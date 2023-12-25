@@ -16,9 +16,7 @@ Please note that the IPsec VPN is setup between an Azure VM and Azure Virtual Ne
 
 Before we configure IPsec VPN using strongSwan, we need to deploy Azure VMs with Public IPs which are in different VNets and there is no connecitivity between VNets in any manner. You could perform this excerise in AWS as well by creating two EC2 instances in different VPCs.
 
-![network-diagram](https://github.com/hisriram96/blog/blob/3cb039401cf898b58c36b0a02fab75d3985d442b/pictures/strongSwan-network-diagram.png)
-
-![test](https://github.com/hisriram96/blog/blob/5d09f18111ae6b33117effb3ff0bbbb97b189327/_pictures/strongSwan-network-diagram.png)
+![network-diagram](https://github.com/hisriram96/blog/assets/56336513/4d1046b6-66dd-4546-aa87-a9510b96fb49)
 
 [![Deploy to Azure](https://aka.ms/deploytoazurebutton)](https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2Fhisriram96%2Fblog%2Fmain%2F_arm-templates%2FstrongSwan-azure-deployment.json)
 
