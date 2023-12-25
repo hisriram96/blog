@@ -14,6 +14,14 @@
             "defaultValue": "testvnet2",
             "type": "String"
         },
+        "adminUsername": {
+            "value": "value",
+            "type": "String"
+        },
+        "adminPassword": {
+            "value": "value",
+            "type": "String"
+        },
         "virtualMachines_testhubvm1_name": {
             "defaultValue": "testhubvm1",
             "type": "String"
@@ -22,8 +30,8 @@
             "defaultValue": "testroutetable",
             "type": "String"
         },
-        "publicIPAddresses_test_ip_1_name": {
-            "defaultValue": "test-ip-1",
+        "publicIPAddresses_testip1_name": {
+            "defaultValue": "testip1",
             "type": "String"
         },
         "virtualMachines_testspokevm1_name": {
@@ -68,6 +76,10 @@
         },
         "networkSecurityGroups_testspokensg2_name": {
             "defaultValue": "testspokensg2",
+            "type": "String"
+        },
+        "presharedkey": {
+            "value": "value",
             "type": "String"
         }
     },
@@ -177,7 +189,7 @@
         {
             "type": "Microsoft.Network/publicIPAddresses",
             "apiVersion": "2023-06-01",
-            "name": "[parameters('publicIPAddresses_test_ip_1_name')]",
+            "name": "[parameters('publicIPAddresses_testip1_name')]",
             "location": "eastus",
             "sku": {
                 "name": "Standard",
@@ -185,7 +197,7 @@
             },
             "properties": {
                 "publicIPAddressVersion": "IPv4",
-                "publicIPAllocationMethod": "Dynamic",
+                "publicIPAllocationMethod": "Static",
                 "idleTimeoutInMinutes": 4,
                 "ipTags": [],
                 "ddosSettings": {
@@ -204,7 +216,7 @@
             },
             "properties": {
                 "publicIPAddressVersion": "IPv4",
-                "publicIPAllocationMethod": "Dynamic",
+                "publicIPAllocationMethod": "Static",
                 "idleTimeoutInMinutes": 4,
                 "ipTags": []
             }
@@ -269,8 +281,8 @@
                 },
                 "osProfile": {
                     "computerName": "[parameters('virtualMachines_testhubvm1_name')]",
-                    "adminUsername": "adminUsername",
-                    "adminPassword": "adminPassword",
+                    "adminUsername": "[parameters('adminUsername')]",
+                    "adminPassword": "[parameters('adminPassword')]",
                     "secrets": [],
                     "allowExtensionOperations": true
                 },
@@ -336,8 +348,8 @@
                 },
                 "osProfile": {
                     "computerName": "[parameters('virtualMachines_testspokevm1_name')]",
-                    "adminUsername": "adminUsername",
-                    "adminPassword": "adminPassword",
+                    "adminUsername": "[parameters('adminUsername')]",
+                    "adminPassword": "[parameters('adminPassword')]",
                     "secrets": [],
                     "allowExtensionOperations": true
                 },
@@ -403,8 +415,8 @@
                 },
                 "osProfile": {
                     "computerName": "[parameters('virtualMachines_testspokevm2_name')]",
-                    "adminUsername": "adminUsername",
-                    "adminPassword": "adminPassword",
+                    "adminUsername": "[parameters('adminUsername')]",
+                    "adminPassword": "[parameters('adminPassword')]",
                     "secrets": [],
                     "allowExtensionOperations": true
                 },
@@ -685,7 +697,7 @@
                 "connectionType": "IPsec",
                 "connectionProtocol": "IKEv2",
                 "routingWeight": 0,
-                "sharedKey": "abc123",
+                "sharedKey": "[parameters('presharedkey')]",
                 "enableBgp": false,
                 "useLocalAzureIpAddress": false,
                 "usePolicyBasedTrafficSelectors": false,
@@ -704,7 +716,7 @@
             "name": "[parameters('networkInterfaces_testhubvm1193_name')]",
             "location": "eastus",
             "dependsOn": [
-                "[resourceId('Microsoft.Network/publicIPAddresses', parameters('publicIPAddresses_test_ip_1_name'))]",
+                "[resourceId('Microsoft.Network/publicIPAddresses', parameters('publicIPAddresses_testip1_name'))]",
                 "[resourceId('Microsoft.Network/virtualNetworks/subnets', parameters('virtualNetworks_testvnet1_name'), 'testhubsubnet')]"
             ],
             "kind": "Regular",
@@ -720,7 +732,7 @@
                             "privateIPAddress": "10.1.1.4",
                             "privateIPAllocationMethod": "Static",
                             "publicIPAddress": {
-                                "id": "[resourceId('Microsoft.Network/publicIPAddresses', parameters('publicIPAddresses_test_ip_1_name'))]"
+                                "id": "[resourceId('Microsoft.Network/publicIPAddresses', parameters('publicIPAddresses_testip1_name'))]"
                             },
                             "subnet": {
                                 "id": "[resourceId('Microsoft.Network/virtualNetworks/subnets', parameters('virtualNetworks_testvnet1_name'), 'testhubsubnet')]"
