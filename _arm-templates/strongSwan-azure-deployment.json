@@ -268,7 +268,7 @@
                         "createOption": "FromImage",
                         "caching": "ReadWrite",
                         "managedDisk": {
-                            "storageAccountType": "Premium_LRS",
+                            "storageAccountType": "Standard_LRS",
                             "id": "[resourceId('Microsoft.Compute/disks', concat(parameters('virtualMachines_testhubvm1_name'), '_disk1_877fe972824b487395a0b1422bcb8b68'))]"
                         },
                         "deleteOption": "Delete",
@@ -279,7 +279,7 @@
                 },
                 "osProfile": {
                     "computerName": "[parameters('virtualMachines_testhubvm1_name')]",
-                    "adminUsername": "sriram",
+                    "adminUsername": "azureuser",
                     "linuxConfiguration": {
                         "disablePasswordAuthentication": false,
                         "provisionVMAgent": true,
@@ -363,15 +363,15 @@
                 },
                 "osProfile": {
                     "computerName": "[parameters('virtualMachines_testspokevm1_name')]",
-                    "adminUsername": "sriram",
+                    "adminUsername": "azureuser",
                     "linuxConfiguration": {
-                        "disablePasswordAuthentication": false,
+                        "disablewordAuthentication": false,
                         "provisionVMAgent": true,
                         "patchSettings": {
                             "patchMode": "AutomaticByPlatform",
                             "automaticByPlatformSettings": {
                                 "rebootSetting": "IfRequired",
-                                "bypassPlatformSafetyChecksOnUserSchedule": false
+                                "byPlatformSafetyChecksOnUserSchedule": false
                             },
                             "assessmentMode": "ImageDefault"
                         },
@@ -447,9 +447,9 @@
                 },
                 "osProfile": {
                     "computerName": "[parameters('virtualMachines_testspokevm2_name')]",
-                    "adminUsername": "sriram",
+                    "adminUsername": "azureuser",
                     "linuxConfiguration": {
-                        "disablePasswordAuthentication": false,
+                        "disablewordAuthentication": false,
                         "provisionVMAgent": true,
                         "patchSettings": {
                             "patchMode": "AutomaticByPlatform",
