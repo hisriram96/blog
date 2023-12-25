@@ -18,6 +18,8 @@ Before we configure IPsec VPN using strongSwan, we need to deploy Azure VMs with
 
 ![network-diagram](https://github.com/hisriram96/blog/blob/3cb039401cf898b58c36b0a02fab75d3985d442b/pictures/strongSwan-network-diagram.png)
 
+![test](https://github.com/hisriram96/blog/blob/5d09f18111ae6b33117effb3ff0bbbb97b189327/_pictures/strongSwan-network-diagram.png)
+
 [![Deploy to Azure](https://aka.ms/deploytoazurebutton)](https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2Fhisriram96%2Fblog%2Fmain%2F_arm-templates%2FstrongSwan-azure-deployment.json)
 
 ## Enable IP forwarding
