@@ -15,11 +15,9 @@
             "type": "String"
         },
         "adminUsername": {
-            "value": "value",
             "type": "String"
         },
         "adminPassword": {
-            "value": "value",
             "type": "String"
         },
         "virtualMachines_testhubvm1_name": {
@@ -79,7 +77,6 @@
             "type": "String"
         },
         "presharedkey": {
-            "value": "value",
             "type": "String"
         }
     },
