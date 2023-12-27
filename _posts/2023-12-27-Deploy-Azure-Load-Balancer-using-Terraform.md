@@ -127,7 +127,7 @@ This is how our architecture will look after the deployment is completed.
    
    variable "virtual_machine_name" {
      type        = string
-     default     = "test-nic"
+     default     = "test-vm"
      description = "Name of the Virtual Machine."
    }
    
