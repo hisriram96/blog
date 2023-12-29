@@ -24,7 +24,7 @@ Please install [Azure CLI](https://learn.microsoft.com/en-us/cli/azure/install-a
 
 ## Deploy a Public Load Balancer
 
-In this section, We will deploy a Public Load Balancer with Backend Pool consisting two Azure Virtual Machines. These VMs will host a simple web page configured by using a custom script extension for Nginx web service. We will perform complete deployment using Terraform.
+In this section, we will deploy a Public Load Balancer with Backend Pool consisting of two Azure Virtual Machines. These VMs will host a simple web page configured by using a custom script extension for Nginx web service. We will perform complete deployment using Terraform.
 
 ### Public Load Balancer Lab Setup
 
