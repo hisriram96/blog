@@ -6,7 +6,7 @@
             "type": "string",
             "defaultValue": "eastus",
             "metadata": {
-                "description": "description"
+                "description": "Name of the region where resources will be deployed."
             }
         },
         "virtual_network_name": {
