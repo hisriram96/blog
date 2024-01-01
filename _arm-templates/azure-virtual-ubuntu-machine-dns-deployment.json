@@ -117,11 +117,11 @@
                 "addressSpace": {
                     "addressPrefixes": ["[parameters('address_prefix')]"]
                 },
-                "dhcpOptions": {
-                    "dnsServers": [
-                        "[parameters('dns_server_private_ip')]"
-                    ]
-                },
+//                "dhcpOptions": {
+//                    "dnsServers": [
+//                        "[parameters('dns_server_private_ip')]"
+//                    ]
+//                },
                 "subnets": [
                     {
                         "name": "[parameters('subnet_name')]",
