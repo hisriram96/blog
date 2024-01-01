@@ -38,7 +38,7 @@ These primary and secondary DNS servers will host an internal DNS zone "example.
 
 We also have another VM configured as web server which we will try to access from another VM within the VNet using FQDN "example.internal".
 
-![Network Diagram]()
+![Network Diagram](https://raw.githubusercontent.com/hisriram96/blog/main/_pictures/azure-dns-lab-two-virtual-machines-network-diagram.png)
 
 [![Deploy to Azure](https://aka.ms/deploytoazurebutton)](https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fgithub.com%2Fhisriram96%2Fblog%2Fblob%2F6f71eb3e8290ed8e88edf87df5d822835c04ab0e%2F_arm-templates%2Fazure-virtual-ubuntu-machine-dns-deployment.json)
 
