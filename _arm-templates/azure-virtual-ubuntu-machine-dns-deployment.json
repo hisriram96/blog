@@ -252,7 +252,8 @@
             "apiVersion": "2023-04-01",
             "location": "[parameters('region_name')]",
             "dependsOn": [
-                "[resourceId('Microsoft.Network/virtualNetworks', parameters('virtual_network_name'))]"
+                "[resourceId('Microsoft.Network/virtualNetworks', parameters('virtual_network_name'))]",
+                "[resourceId('Microsoft.Network/networkInterfaces', parameters('dns_server_nic'))]"
             ],
             "tags": {},
             "properties": {
