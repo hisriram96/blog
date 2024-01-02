@@ -366,9 +366,9 @@ Execute ```dig``` or ```nslookup``` command to verify the name resolution of our
 
 Dig output:
 
-<img width="334" alt="image" src="https://github.com/hisriram96/blog/assets/56336513/51f8b4ba-2548-4454-9736-c6484623c613">
+<img width="431" alt="image" src="https://github.com/hisriram96/blog/assets/56336513/e37b5822-e5ff-442e-92c1-390f145fca07">
 
 Packet capture:
 
-
+<img width="1199" alt="image" src="https://github.com/hisriram96/blog/assets/56336513/3fc77277-abf5-4b94-9a5a-ef9781557698">
 
