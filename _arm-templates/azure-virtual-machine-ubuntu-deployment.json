@@ -160,7 +160,7 @@
                             "description": "Allow Inbound HTTP/HTTPS Traffic.",
                             "protocol": "Tcp",
                             "sourcePortRange": "*",
-                            "destinationPortRange": [
+                            "destinationPortRanges": [
                               "80",
                               "443"
                             ],
