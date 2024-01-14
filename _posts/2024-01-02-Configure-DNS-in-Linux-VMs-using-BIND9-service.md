@@ -40,7 +40,7 @@ We also have another VM configured as web server which we will try to access fro
 
 ![Network Diagram](https://raw.githubusercontent.com/hisriram96/blog/main/_pictures/azure-dns-lab-two-virtual-machines-network-diagram.png)
 
-[![Deploy to Azure](https://aka.ms/deploytoazurebutton)](https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2Fhisriram96%2Fblog%2Fmain%2F_arm-templates%2Fazure-virtual-ubuntu-machine-dns-deployment.json)
+[![Deploy to Azure](https://aka.ms/deploytoazurebutton)](https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2Fhisriram96%2Fblog%2Fmain%2F_arm-templates%2Fazure-virtual-machine-ubuntu-dns-deployment.json)
 
 ## Configure DNS server using BIND9
 
