@@ -150,7 +150,7 @@
                             "sourceAddressPrefix": "*",
                             "destinationAddressPrefix": "*",
                             "access": "Allow",
-                            "priority": 2000,
+                            "priority": 200,
                             "direction": "Inbound"
                         }
                     },
@@ -160,11 +160,14 @@
                             "description": "Allow Inbound HTTP/HTTPS Traffic.",
                             "protocol": "Tcp",
                             "sourcePortRange": "*",
-                            "destinationPortRange": "80,443",
+                            "destinationPortRange": [
+                              "80",
+                              "443"
+                            ],
                             "sourceAddressPrefix": "*",
                             "destinationAddressPrefix": "*",
                             "access": "Allow",
-                            "priority": 2800,
+                            "priority": 800,
                             "direction": "Inbound"
                         }
                     }
