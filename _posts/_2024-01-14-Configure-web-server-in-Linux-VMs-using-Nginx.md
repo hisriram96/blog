@@ -159,10 +159,14 @@ We will create a self-signed certificate chain with own custom root CA.
 
 7. Create a full chain certificate bundling root and server certificates.
 
-   ````
+   ```
    cat server.crt > bundle.crt
    cat root.crt >> bundle.crt
    ```
+
+   Example:
+
+   <img width="721" alt="image" src="https://github.com/hisriram96/blog/assets/56336513/39c1f863-78bd-4926-96d2-6402b007d7dd">
 
 8. Install root certificate in the [CA trust store](https://ubuntu.com/server/docs/security-trust-store) of Ubuntu. 
 
@@ -171,6 +175,10 @@ We will create a self-signed certificate chain with own custom root CA.
    sudo cp root.crt /usr/local/share/ca-certificates
    sudo update-ca-certificates
    ```
+
+   Example:
+
+   <img width="543" alt="image" src="https://github.com/hisriram96/blog/assets/56336513/e4ee3891-9504-4f38-b936-9598928ba846">
 
 ### Issue a trusted CA certificate using Let's Encrypt
 
