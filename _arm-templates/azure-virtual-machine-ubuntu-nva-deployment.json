@@ -46,6 +46,14 @@
             "type": "string",
             "defaultValue": "test-nva"
         },
+        "trust_nic_ip": {
+            "type": "string",
+            "defaultValue": "192.168.0.132"
+        },
+        "untrust_nic_ip": {
+            "type": "string",
+            "defaultValue": "192.168.0.196"
+        },
         "bastion_name": {
             "type": "string",
             "defaultValue": "test-bastion"
@@ -55,11 +63,34 @@
     "variables": {},
     "resources": [
         {
+            "name": "test-routetable",
+            "type": "Microsoft.Network/routeTables",
+            "apiVersion": "2023-04-01",
+            "location": "[parameters('region_name')]",
+            "tags": {},
+            "properties": {
+                "routes": [
+                    {
+                        "name": "default-route",
+                        "properties": {
+                            "addressPrefix": "0.0.0.0/0",
+                            "nextHopType": "VirtualAppliance",
+                            "nextHopIpAddress": "[parameters('trust_nic_ip')]"
+                        }
+                    }
+                ],
+                "disableBgpRoutePropagation": true
+            }
+        },
+        {
             "name": "[parameters('vnet_name')]",
             "type": "Microsoft.Network/virtualNetworks",
             "apiVersion": "2023-04-01",
             "location": "[resourceGroup().location]",
             "tags": {},
+            "dependsOn": [
+                "[resourceId('Microsoft.Network/routeTables', 'test-routetable')]"
+            ],
             "properties": {
                 "addressSpace": {
                     "addressPrefixes": [
@@ -88,7 +119,10 @@
                     {
                         "name": "vm-subnet",
                         "properties": {
-                            "addressPrefix": "[parameters('vmsubnet_prefix')]"
+                            "addressPrefix": "[parameters('vmsubnet_prefix')]",
+                            "routeTable": {
+                                "id": "[resourceId('Microsoft.Network/routeTables', 'test-routetable')]"
+                            }
                         }
                     }
                 ]
@@ -245,7 +279,8 @@
                     {
                         "name": "ipconfig",
                         "properties": {
-                            "privateIPAllocationMethod": "Dynamic",
+                            "privateIPAllocationMethod": "Static",
+                            "privateIPAddress": "[parameters('untrust_nic_ip')]",
                             "publicIPAddress": {
                                 "id": "[resourceId('Microsoft.Network/publicIPAddresses', 'nva-ip')]"
                             },
@@ -271,7 +306,8 @@
                     {
                         "name": "ipconfig",
                         "properties": {
-                            "privateIPAllocationMethod": "Dynamic",
+                            "privateIPAllocationMethod": "Static",
+                            "privateIPAddress": "[parameters('trust_nic_ip')]",
                             "subnet": {
                                 "id": "[resourceId('Microsoft.Network/virtualNetworks/subnets', parameters('vnet_name'), 'trust-subnet')]"
                             }
