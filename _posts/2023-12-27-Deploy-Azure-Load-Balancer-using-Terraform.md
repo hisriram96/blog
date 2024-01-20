@@ -43,7 +43,7 @@ This is how our architecture will look after the deployment is completed.
    
 2. Create a file named ```providers.tf``` and paste the configuration below. Here we have configured ```azurerm``` as Terraform provider for creating and managing our Azure resources.
 
-   ```
+   ```terraform
    terraform {
      required_version = ">=0.12"
    
@@ -70,7 +70,7 @@ This is how our architecture will look after the deployment is completed.
 
 3. Create a file named ```variables.tf``` and paste the configuration below. We declare all the variables that we intend to use in our Terraform deployment in the ```variables.tf``` file. You could modify the default values as per your choice or naming convention for Azure resources.
 
-   ```
+   ```terraform
    variable "resource_group_location" {
      type        = string
      default     = "eastus"
@@ -158,7 +158,7 @@ This is how our architecture will look after the deployment is completed.
 
 3. Create a file named ```main.tf``` and paste the configuration below. The ```main.tf``` is our configuration file where we use to deploy our Azure resources.
 
-   ```
+   ```terraform
    #Create Resource Group
    resource "azurerm_resource_group" "my_resource_group" {
      location = var.resource_group_location
@@ -218,15 +218,15 @@ This is how our architecture will look after the deployment is completed.
    # Create Network Interface
    resource "azurerm_network_interface" "my_nic" {
      count               = 2
-     name                = "${var.network_interface_name}${count.index}"
+     name                = "${var.network_interface_name}-${count.index}"
      location            = azurerm_resource_group.my_resource_group.location
      resource_group_name = azurerm_resource_group.my_resource_group.name
    
      ip_configuration {
-       name                          = "ipconfig${count.index}"
+       name                          = "ipconfig-${count.index}"
        subnet_id                     = azurerm_subnet.my_subnet.id
        private_ip_address_allocation = "Dynamic"
-       primary = true
+       primary                       = true
      }
    }
    
@@ -234,21 +234,21 @@ This is how our architecture will look after the deployment is completed.
    resource "azurerm_network_interface_backend_address_pool_association" "my_nic_lb_pool" {
      count                   = 2
      network_interface_id    = azurerm_network_interface.my_nic[count.index].id
-     ip_configuration_name   = "ipconfig${count.index}"
+     ip_configuration_name   = "ipconfig-${count.index}"
      backend_address_pool_id = azurerm_lb_backend_address_pool.my_lb_pool.id
    }
    
    # Create Virtual Machine
    resource "azurerm_linux_virtual_machine" "my_vm" {
      count                 = 2
-     name                  = "${var.virtual_machine_name}${count.index}"
+     name                  = "${var.virtual_machine_name}-${count.index}"
      location              = azurerm_resource_group.my_resource_group.location
      resource_group_name   = azurerm_resource_group.my_resource_group.name
      network_interface_ids = [azurerm_network_interface.my_nic[count.index].id]
      size                  = var.virtual_machine_size
    
      os_disk {
-       name                 = "${var.disk_name}${count.index}"
+       name                 = "${var.disk_name}-${count.index}"
        caching              = "ReadWrite"
        storage_account_type = var.redundancy_type
      }
@@ -277,7 +277,7 @@ This is how our architecture will look after the deployment is completed.
    
      settings = <<SETTINGS
     {
-     "commandToExecute": "sudo apt-get update && sudo apt-get install nginx -y && echo '<h1>Hello World</h1>' > /var/www/html/index.html && sudo systemctl restart nginx"
+     "commandToExecute": "sudo apt-get update && sudo apt-get install nginx -y && echo \"Hello World from $(hostname)\" > /var/www/html/index.html && sudo systemctl restart nginx"
     }
    SETTINGS
    
@@ -336,7 +336,7 @@ This is how our architecture will look after the deployment is completed.
 
 4. Create a file named ```outputs.tf``` and paste the configuration below. This is display the IP address in URL format which we could use for accessing our application.
 
-   ```
+   ```terraform
    output "public_ip_address" {
      value = "http://${azurerm_public_ip.my_public_ip.ip_address}"
    }
@@ -344,25 +344,31 @@ This is how our architecture will look after the deployment is completed.
 
 5. Initialize the working directory containing Terraform configuration files (```load-balancer-demo``` in our case).
 
-   ```
+   ```terraform
    terraform init -upgrade
    ```
 
 6. Create an execution plan to preview the Terraform deployment.
 
-   ```
+   ```terraform
    terraform plan -out main.tfplan
    ```
 
 7. Apply Terraform configuration previewed in the execution plan.
 
-   ```
+   ```terraform
    terraform apply main.tfplan
    ```
 
 ### Verify the deployment
 
-After the ```terraform apply``` command is executed successfully, you can verify if you could access our web page using the public IP displayed in the output ```terraform apply``` command.
+When you apply the execution plan, Terraform displays the frontend public IP address. If you've cleared the screen, you can retrieve that value with the following Terraform command:
+
+```console
+echo $(terraform output -raw public_ip_address)
+```
+
+You could verify if you could access our web page by using the frontend Public IP address of the Azure Load Balancer.
 
 <img width="302" alt="image" src="https://github.com/hisriram96/blog/assets/56336513/f02b30f8-389f-4cd9-b4bb-f9717d1aaeb3">
 
@@ -387,7 +393,7 @@ This is how our architecture will look after the deployment is completed.
    
 2. Create a file named ```providers.tf``` and paste the configuration below. Here we have configured ```azurerm``` as Terraform provider for creating and managing our Azure resources.
 
-   ```
+   ```terraform
    terraform {
      required_version = ">=0.12"
    
@@ -414,7 +420,7 @@ This is how our architecture will look after the deployment is completed.
 
 3. Create a file named ```variables.tf``` and paste the configuration below. We declare all the variables that we intend to use in our Terraform deployment in the ```variables.tf``` file. You could modify the default values as per your choice or naming convention for Azure resources.
 
-   ```
+   ```terraform
    variable "resource_group_location" {
      type        = string
      default     = "eastus"
@@ -508,7 +514,7 @@ This is how our architecture will look after the deployment is completed.
 
 3. Create a file named ```main.tf``` and paste the configuration below. The ```main.tf``` is our configuration file where we use to deploy our Azure resources.
 
-   ```
+   ```terraform
    #Create Resource Group
    resource "azurerm_resource_group" "my_resource_group" {
      location = var.resource_group_location
@@ -571,7 +577,7 @@ This is how our architecture will look after the deployment is completed.
    # Create Public IPs
    resource "azurerm_public_ip" "my_public_ip" {
      count               = 2
-     name                = "${var.public_ip_name}${count.index}"
+     name                = "${var.public_ip_name}-${count.index}"
      location            = azurerm_resource_group.my_resource_group.location
      resource_group_name = azurerm_resource_group.my_resource_group.name
      allocation_method   = "Static"
@@ -601,12 +607,12 @@ This is how our architecture will look after the deployment is completed.
    # Create Network Interfaces
    resource "azurerm_network_interface" "my_nic" {
      count               = 3
-     name                = "${var.network_interface_name}${count.index}"
+     name                = "${var.network_interface_name}-${count.index}"
      location            = azurerm_resource_group.my_resource_group.location
      resource_group_name = azurerm_resource_group.my_resource_group.name
    
      ip_configuration {
-       name                          = "ipconfig${count.index}"
+       name                          = "ipconfig-${count.index}"
        subnet_id                     = azurerm_subnet.my_subnet.id
        private_ip_address_allocation = "Dynamic"
        primary                       = true
@@ -615,12 +621,12 @@ This is how our architecture will look after the deployment is completed.
    
    # Associate one of the Public IPs to the Network Interface which is not associated to Backend Pool of the Load Balancer 
    resource "azurerm_network_interface" "my_nic2" {
-     name                = "${var.network_interface_name}2"
+     name                = "${var.network_interface_name}-2"
      location            = azurerm_resource_group.my_resource_group.location
      resource_group_name = azurerm_resource_group.my_resource_group.name
    
      ip_configuration {
-       name                          = "ipconfig2"
+       name                          = "ipconfig-2"
        subnet_id                     = azurerm_subnet.my_subnet.id
        private_ip_address_allocation = "Dynamic"
        primary                       = true
@@ -632,21 +638,21 @@ This is how our architecture will look after the deployment is completed.
    resource "azurerm_network_interface_backend_address_pool_association" "my_nic_lb_pool" {
      count                   = 2
      network_interface_id    = azurerm_network_interface.my_nic[count.index].id
-     ip_configuration_name   = "ipconfig${count.index}"
+     ip_configuration_name   = "ipconfig-${count.index}"
      backend_address_pool_id = azurerm_lb_backend_address_pool.my_lb_pool.id
    }
    
    # Create Virtual Machine
    resource "azurerm_linux_virtual_machine" "my_vm" {
      count                 = 3
-     name                  = "${var.virtual_machine_name}${count.index}"
+     name                  = "${var.virtual_machine_name}-${count.index}"
      location              = azurerm_resource_group.my_resource_group.location
      resource_group_name   = azurerm_resource_group.my_resource_group.name
      network_interface_ids = [azurerm_network_interface.my_nic[count.index].id]
      size                  = var.virtual_machine_size
    
      os_disk {
-       name                 = "${var.disk_name}${count.index}"
+       name                 = "${var.disk_name}-${count.index}"
        caching              = "ReadWrite"
        storage_account_type = var.redundancy_type
      }
@@ -675,7 +681,7 @@ This is how our architecture will look after the deployment is completed.
    
      settings = <<SETTINGS
     {
-     "commandToExecute": "sudo apt-get update && sudo apt-get install nginx -y && echo '<h1>Hello World</h1>' > /var/www/html/index.html && sudo systemctl restart nginx"
+     "commandToExecute": "sudo apt-get update && sudo apt-get install nginx -y && echo \"Hello World from $(hostname)\" > /var/www/html/index.html && sudo systemctl restart nginx"
     }
    SETTINGS
    
@@ -723,7 +729,7 @@ This is how our architecture will look after the deployment is completed.
 
 4. Create a file named ```outputs.tf``` and paste the configuration below. This is display the IP address in URL format which we could use for accessing our application.
 
-   ```
+   ```terraform
    output "private_ip_address" {
      value = "http://${azurerm_lb.my_lb.private_ip_address}"
    }
@@ -731,19 +737,19 @@ This is how our architecture will look after the deployment is completed.
 
 5. Initialize the working directory containing Terraform configuration files (```internal-load-balancer-demo``` in our case).
 
-   ```
+   ```terraform
    terraform init -upgrade
    ```
 
 6. Create an execution plan to preview the Terraform deployment.
 
-   ```
+   ```terraform
    terraform plan -out main.tfplan
    ```
 
 7. Apply Terraform configuration previewed in the execution plan.
 
-   ```
+   ```terraform
    terraform apply main.tfplan
    ```
 
@@ -757,7 +763,7 @@ Since frontend IP of an Internal Load Balancer is private IP, you cannot connect
 
 In order to avoid any extra charges, it is advisable to delete the resources which are not required. You could delete all the Azure resouces which we have deployed so far using Azure Portal or by executing the following Terraform commands.
 
-   ```
+   ```terraform
    terraform plan -destroy -out main.destroy.tfplan
    terraform apply main.destroy.tfplan
    ```
