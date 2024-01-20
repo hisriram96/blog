@@ -42,7 +42,7 @@ Example:
 
 Since we deployed Azure VMs, we must also enable IP forwarding in the vNIC of the Azure VMs.
 
-Please note that enabling IP forwarding in the vNIC of the Azure VM is an additional step as it does does not enable IP forwarding in the guest OS so we still need to enable IP forwarding in Ubuntu OS.
+Please note that enabling IP forwarding in the vNIC of the Azure VM is an additional step as it does not enable IP forwarding in the guest OS so we still need to enable IP forwarding in Ubuntu OS.
 
 <img width="1184" alt="image" src="https://github.com/hisriram96/blog/assets/56336513/056e8a7a-7d29-47d3-a540-95a1bfca7e1c">
 
