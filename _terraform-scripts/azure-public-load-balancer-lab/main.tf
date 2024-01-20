@@ -57,7 +57,7 @@ resource "azurerm_public_ip" "my_public_ip" {
 # Create Network Interface
 resource "azurerm_network_interface" "my_nic" {
   count               = 2
-  name                = "${var.network_interface_name}${count.index}"
+  name                = "${var.network_interface_name}-${count.index}"
   location            = azurerm_resource_group.my_resource_group.location
   resource_group_name = azurerm_resource_group.my_resource_group.name
 
@@ -80,7 +80,7 @@ resource "azurerm_network_interface_backend_address_pool_association" "my_nic_lb
 # Create Virtual Machine
 resource "azurerm_linux_virtual_machine" "my_vm" {
   count                 = 2
-  name                  = "${var.virtual_machine_name}${count.index}"
+  name                  = "${var.virtual_machine_name}-${count.index}"
   location              = azurerm_resource_group.my_resource_group.location
   resource_group_name   = azurerm_resource_group.my_resource_group.name
   network_interface_ids = [azurerm_network_interface.my_nic[count.index].id]
@@ -116,7 +116,7 @@ resource "azurerm_virtual_machine_extension" "my_vm_extension" {
 
   settings = <<SETTINGS
  {
-  "commandToExecute": "sudo apt-get update && sudo apt-get install nginx -y && echo '<h1>Hello World</h1>' > /var/www/html/index.html && sudo systemctl restart nginx"
+  "commandToExecute": "sudo apt-get update && sudo apt-get install nginx -y && echo \"Hello World from $(hostname)\" > /var/www/html/index.html && sudo systemctl restart nginx"
  }
 SETTINGS
 
