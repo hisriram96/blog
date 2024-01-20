@@ -60,7 +60,7 @@ resource "azurerm_subnet_network_security_group_association" "my_nsg_association
 # Create Public IPs
 resource "azurerm_public_ip" "my_public_ip" {
   count               = 2
-  name                = "${var.public_ip_name}${count.index}"
+  name                = "${var.public_ip_name}-${count.index}"
   location            = azurerm_resource_group.my_resource_group.location
   resource_group_name = azurerm_resource_group.my_resource_group.name
   allocation_method   = "Static"
@@ -90,12 +90,12 @@ resource "azurerm_subnet_nat_gateway_association" "my_nat_gateway_subnet_associa
 # Create Network Interfaces
 resource "azurerm_network_interface" "my_nic" {
   count               = 3
-  name                = "${var.network_interface_name}${count.index}"
+  name                = "${var.network_interface_name}-${count.index}"
   location            = azurerm_resource_group.my_resource_group.location
   resource_group_name = azurerm_resource_group.my_resource_group.name
 
   ip_configuration {
-    name                          = "ipconfig${count.index}"
+    name                          = "ipconfig-${count.index}"
     subnet_id                     = azurerm_subnet.my_subnet.id
     private_ip_address_allocation = "Dynamic"
     primary                       = true
@@ -104,12 +104,12 @@ resource "azurerm_network_interface" "my_nic" {
 
 # Associate one of the Public IPs to the Network Interface which is not associated to Backend Pool of the Load Balancer 
 resource "azurerm_network_interface" "my_nic2" {
-  name                = "${var.network_interface_name}2"
+  name                = "${var.network_interface_name}-2"
   location            = azurerm_resource_group.my_resource_group.location
   resource_group_name = azurerm_resource_group.my_resource_group.name
 
   ip_configuration {
-    name                          = "ipconfig2"
+    name                          = "ipconfig-2"
     subnet_id                     = azurerm_subnet.my_subnet.id
     private_ip_address_allocation = "Dynamic"
     primary                       = true
@@ -121,21 +121,21 @@ resource "azurerm_network_interface" "my_nic2" {
 resource "azurerm_network_interface_backend_address_pool_association" "my_nic_lb_pool" {
   count                   = 2
   network_interface_id    = azurerm_network_interface.my_nic[count.index].id
-  ip_configuration_name   = "ipconfig${count.index}"
+  ip_configuration_name   = "ipconfig-${count.index}"
   backend_address_pool_id = azurerm_lb_backend_address_pool.my_lb_pool.id
 }
 
 # Create Virtual Machine
 resource "azurerm_linux_virtual_machine" "my_vm" {
   count                 = 3
-  name                  = "${var.virtual_machine_name}${count.index}"
+  name                  = "${var.virtual_machine_name}-${count.index}"
   location              = azurerm_resource_group.my_resource_group.location
   resource_group_name   = azurerm_resource_group.my_resource_group.name
   network_interface_ids = [azurerm_network_interface.my_nic[count.index].id]
   size                  = var.virtual_machine_size
 
   os_disk {
-    name                 = "${var.disk_name}${count.index}"
+    name                 = "${var.disk_name}-${count.index}"
     caching              = "ReadWrite"
     storage_account_type = var.redundancy_type
   }
@@ -164,7 +164,7 @@ resource "azurerm_virtual_machine_extension" "my_vm_extension" {
 
   settings = <<SETTINGS
  {
-  "commandToExecute": "sudo apt-get update && sudo apt-get install nginx -y && echo '<h1>Hello World</h1>' > /var/www/html/index.html && sudo systemctl restart nginx"
+  "commandToExecute": "sudo apt-get update && sudo apt-get install nginx -y && echo \"Hello World from $(hostname)\" > /var/www/html/index.html && sudo systemctl restart nginx"
  }
 SETTINGS
 
