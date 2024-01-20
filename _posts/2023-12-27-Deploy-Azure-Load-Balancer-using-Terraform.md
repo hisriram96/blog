@@ -364,7 +364,7 @@ This is how our architecture will look after the deployment is completed.
 
 When you apply the execution plan, Terraform displays the frontend public IP address. If you've cleared the screen, you can retrieve that value with the following Terraform command:
 
-```console
+```
 echo $(terraform output -raw public_ip_address)
 ```
 
