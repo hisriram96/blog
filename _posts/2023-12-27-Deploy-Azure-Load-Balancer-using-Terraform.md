@@ -763,9 +763,9 @@ Since frontend IP of an Internal Load Balancer is private IP, you cannot connect
 
 In order to avoid any extra charges, it is advisable to delete the resources which are not required. You could delete all the Azure resouces which we have deployed so far using Azure Portal or by executing the following Terraform commands.
 
-   ```
-   terraform plan -destroy -out main.destroy.tfplan
-   terraform apply main.destroy.tfplan
-   ```
+```
+terraform plan -destroy -out main.destroy.tfplan
+terraform apply main.destroy.tfplan
+```
 
 Please note that the above commands need to be executed in the working directory containing Terraform configuration files (```internal-load-balancer-demo``` in our case).
