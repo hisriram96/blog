@@ -43,7 +43,7 @@ This is how our architecture will look after the deployment is completed.
    
 2. Create a file named ```providers.tf``` and paste the configuration below. Here we have configured ```azurerm``` as Terraform provider for creating and managing our Azure resources.
 
-   ```terraform
+   ```
    terraform {
      required_version = ">=0.12"
    
@@ -70,7 +70,7 @@ This is how our architecture will look after the deployment is completed.
 
 3. Create a file named ```variables.tf``` and paste the configuration below. We declare all the variables that we intend to use in our Terraform deployment in the ```variables.tf``` file. You could modify the default values as per your choice or naming convention for Azure resources.
 
-   ```terraform
+   ```
    variable "resource_group_location" {
      type        = string
      default     = "eastus"
@@ -158,7 +158,7 @@ This is how our architecture will look after the deployment is completed.
 
 3. Create a file named ```main.tf``` and paste the configuration below. The ```main.tf``` is our configuration file where we use to deploy our Azure resources.
 
-   ```terraform
+   ```
    #Create Resource Group
    resource "azurerm_resource_group" "my_resource_group" {
      location = var.resource_group_location
@@ -336,7 +336,7 @@ This is how our architecture will look after the deployment is completed.
 
 4. Create a file named ```outputs.tf``` and paste the configuration below. This is display the IP address in URL format which we could use for accessing our application.
 
-   ```terraform
+   ```
    output "public_ip_address" {
      value = "http://${azurerm_public_ip.my_public_ip.ip_address}"
    }
@@ -344,19 +344,19 @@ This is how our architecture will look after the deployment is completed.
 
 5. Initialize the working directory containing Terraform configuration files (```load-balancer-demo``` in our case).
 
-   ```terraform
+   ```
    terraform init -upgrade
    ```
 
 6. Create an execution plan to preview the Terraform deployment.
 
-   ```terraform
+   ```
    terraform plan -out main.tfplan
    ```
 
 7. Apply Terraform configuration previewed in the execution plan.
 
-   ```terraform
+   ```
    terraform apply main.tfplan
    ```
 
@@ -393,7 +393,7 @@ This is how our architecture will look after the deployment is completed.
    
 2. Create a file named ```providers.tf``` and paste the configuration below. Here we have configured ```azurerm``` as Terraform provider for creating and managing our Azure resources.
 
-   ```terraform
+   ```
    terraform {
      required_version = ">=0.12"
    
@@ -420,7 +420,7 @@ This is how our architecture will look after the deployment is completed.
 
 3. Create a file named ```variables.tf``` and paste the configuration below. We declare all the variables that we intend to use in our Terraform deployment in the ```variables.tf``` file. You could modify the default values as per your choice or naming convention for Azure resources.
 
-   ```terraform
+   ```
    variable "resource_group_location" {
      type        = string
      default     = "eastus"
@@ -514,7 +514,7 @@ This is how our architecture will look after the deployment is completed.
 
 3. Create a file named ```main.tf``` and paste the configuration below. The ```main.tf``` is our configuration file where we use to deploy our Azure resources.
 
-   ```terraform
+   ```
    #Create Resource Group
    resource "azurerm_resource_group" "my_resource_group" {
      location = var.resource_group_location
@@ -729,7 +729,7 @@ This is how our architecture will look after the deployment is completed.
 
 4. Create a file named ```outputs.tf``` and paste the configuration below. This is display the IP address in URL format which we could use for accessing our application.
 
-   ```terraform
+   ```
    output "private_ip_address" {
      value = "http://${azurerm_lb.my_lb.private_ip_address}"
    }
@@ -737,19 +737,19 @@ This is how our architecture will look after the deployment is completed.
 
 5. Initialize the working directory containing Terraform configuration files (```internal-load-balancer-demo``` in our case).
 
-   ```terraform
+   ```
    terraform init -upgrade
    ```
 
 6. Create an execution plan to preview the Terraform deployment.
 
-   ```terraform
+   ```
    terraform plan -out main.tfplan
    ```
 
 7. Apply Terraform configuration previewed in the execution plan.
 
-   ```terraform
+   ```
    terraform apply main.tfplan
    ```
 
@@ -763,7 +763,7 @@ Since frontend IP of an Internal Load Balancer is private IP, you cannot connect
 
 In order to avoid any extra charges, it is advisable to delete the resources which are not required. You could delete all the Azure resouces which we have deployed so far using Azure Portal or by executing the following Terraform commands.
 
-   ```terraform
+   ```
    terraform plan -destroy -out main.destroy.tfplan
    terraform apply main.destroy.tfplan
    ```
