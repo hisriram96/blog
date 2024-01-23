@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "Configure Linux VM as a web server Nginx"
+title: "Configure Linux VM as a web server using Nginx"
 author: Sriram H. Iyer
 ---
 
