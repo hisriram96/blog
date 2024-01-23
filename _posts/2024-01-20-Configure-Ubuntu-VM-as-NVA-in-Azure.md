@@ -53,7 +53,7 @@ Please note that enabling IP forwarding in the NICs does not enable IP forwardin
 
 In Ubuntu, the IP forwarding can be enabled by modifying the contents of ```/etc/sysctl.conf```. Another easy way to do it is by using ```sed``` command as below.
 
-```
+```bash
 sudo sed -i 's/#net.ipv4.ip_forward=1/net.ipv4.ip_forward=1/g' /etc/sysctl.conf
 sudo sed -i 's/#net.ipv6.conf.all.forwarding=1/net.ipv6.conf.all.forwarding=1/g' /etc/sysctl.conf
 sudo sysctl -p
@@ -77,7 +77,7 @@ We will configure SNAT in our Ubuntu NVA using [iptables](https://help.ubuntu.co
 
 Configure 'iptables' to SNAT any tarffic using the private IP address of the untrust NIC by executing the following command.
 
-```
+```bash
 sudo iptables -t nat -A POSTROUTING -s 0/0 -o eth0 -j MASQUERADE
 ```
 
@@ -105,9 +105,10 @@ Output of ping fom the VM.
 
 Packet capture of the NVA.
 
-```
+```bash
 sudo tcpdump -nni any icmp
 ```
 
 <img width="1026" alt="image" src="https://github.com/hisriram96/blog/assets/56336513/41cd141b-9634-459d-9764-f5bae19e2f69">
 
+<link rel="alternate" type="application/rss+xml"  href="{{ site.url }}/feed.xml" title="{{ site.title }}">
