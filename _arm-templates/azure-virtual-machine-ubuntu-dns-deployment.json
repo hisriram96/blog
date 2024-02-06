@@ -138,6 +138,10 @@
             "tags": {},
             "properties": {
                 "publicIPAllocationMethod": "Static"
+            },
+            "sku": {
+                "name": "Standard",
+                "tier": "Regional"
             }
         },
         {

@@ -130,7 +130,11 @@
             "location": "[resourceGroup().location]",
             "tags": {},
             "properties": {
-                "publicIPAllocationMethod": "Dynamic"
+                "publicIPAllocationMethod": "Static"
+            },
+            "sku": {
+                "name": "Standard",
+                "tier": "Regional"
             }
         },
         {
