@@ -4,7 +4,7 @@ title: About me
 permalink: /about/
 ---
 
-# <img width="150" height="150" src="https://media.licdn.com/dms/image/D5603AQEM9smCsoxO0w/profile-displayphoto-shrink_400_400/0/1701503092699?e=1706745600&v=beta&t=H9QxjcUzIQwLZNEizMOCF6cHvsBwAVymhYVOLMCoo9I">
+# <img width="150" height="150" src="https://github.com/hisriram96/blog/assets/56336513/22571102-c7a7-4b2c-970a-8c84ab3dab1a">
 
 <p style='text-align: justify;'>Thank you for visiting my blog, I am excited to have you here. My name is Sriram, and I am an IT professional with 6 years of experience in various areas like networking and cloud computing. This blog is a space where I share my knowledge, experiences, and insights about the IT industry. From technical tutorials to industry news and trends, you’ll find a wide range of topics covered here.</p>
 
