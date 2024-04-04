@@ -6,7 +6,7 @@ author: Sriram H. Iyer
 
 ## Overview
 
-In ![one of my previous blogs](https://blog.hisriram.com/2024/01/14/Configure-web-server-in-Linux-VMs-using-Nginx.html), we had deployed an Ubuntu VM in Azure and configured it as a web server using [Nginx](https://nginx.org/en/).
+In a previous [blog](https://blog.hisriram.com/2024/01/14/Configure-web-server-in-Linux-VMs-using-Nginx.html), we had deployed an Ubuntu VM in Azure and configured it as a web server using [Nginx](https://nginx.org/en/).
 
 We also secured the web traffic by using SSL certificate.
 
@@ -16,7 +16,7 @@ We will configure Nginx so that our web server would authenticate client as well
 
 ## Pre-requisites
 
-This blog assumes that you already went through the previous ![blog](https://blog.hisriram.com/2024/01/14/Configure-web-server-in-Linux-VMs-using-Nginx.html) and have basic knowledge of Nginx configuration as we would focus on configuring mTLS using Nginx and would touch suface of basic Nginx cofnigration for web server.
+This blog assumes that you already went through the previous [blog](https://blog.hisriram.com/2024/01/14/Configure-web-server-in-Linux-VMs-using-Nginx.html) and have basic knowledge of Nginx configuration as we would focus on configuring mTLS using Nginx and would touch suface of basic Nginx cofnigration for web server.
 
 ## Network Architecture
 
@@ -47,9 +47,7 @@ We will create a self-signed certificate chain with own custom root CA.
 
 2. Create a CSR (Certificate Signing Request) for root certificate and self-sign it
 
-   Generate the Certificate Signing Request (CSR). The CSR is a public key that is given to a CA when requesting a certificate. The CA issues the certificate for this specific request.
-
-   We will be prompted for the password for the root key, and the organizational information for the custom CA such as Country/Region, State, Org, OU, and the fully qualified domain name (this is the domain of the issuer).
+   > Please note that the CN (Common Name) of the root certificate must be different from that of the server certificate. In this example, the CN for the issuer is `example.com` and the server certificate's CN is `www.example.com`.
 
    ```bash
    openssl req -new -sha256 -key root.key -out root.csr
@@ -68,8 +66,6 @@ We will create a self-signed certificate chain with own custom root CA.
    ```
 
 5. Create the CSR for server certificate.
-
-   > Please note that the CN (Common Name) for the server certificate must be different from the issuer's domain. For example, in this case, the CN for the issuer is `example.com` and the server certificate's CN is `www.example.com`.
 
    ```bash
    openssl req -new -sha256 -key server.key -out server.csr
@@ -241,6 +237,9 @@ server {
        if ($ssl_client_verify != SUCCESS) { return 403; }
 }
 ```
+
+Example:
+
 
 
 ## Verify accessing the Nginx
