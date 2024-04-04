@@ -165,7 +165,7 @@ We will create a self-signed certificate chain with own custom root CA.
 
    Example:
 
-   <img width="757" alt="image" src="https://github.com/hisriram96/blog/assets/56336513/a629fef4-e607-47fe-82bc-26f3e4d3b345">
+   <img width="401" alt="image" src="https://github.com/hisriram96/blog/assets/56336513/9bd0d58b-4956-4391-8cee-eb7fd3967fa9">
 
 6. Verify accessing the web site.
 
@@ -178,78 +178,68 @@ We will create a self-signed certificate chain with own custom root CA.
    <img width="623" alt="image" src="https://github.com/hisriram96/blog/assets/56336513/0a342c30-b506-44be-9f3d-ff090d2640a4">
 
 
+## Create SSL certificate for client authentication
+
+We must configure another SSL certificate Before configuring the client authentication. We could use the same `bundle.crt` file which we created before but using different certificate for client authentication is a best practice and security recommendation.
+
+We can use the OpenSSL commands to create a self-signed client certificate as well.
+
+```
+openssl ecparam -out client.key -name prime256v1 -genkey
+openssl req -new -sha256 -key client.key -out client.csr
+openssl x509 -req -sha256 -days 365 -in client.csr -signkey client.key -out client.crt
+```
+
+Example:
+
+<img width="832" alt="image" src="https://github.com/hisriram96/blog/assets/56336513/788d523b-d6cc-4e08-8a41-a273aea5f7e2">
+
 ## Configuring client authentication or mutual TLS in Nginx
-
-To configure client authentication in Nginx append the following code block in the virtual host file `/etc/nginx/sites-enabled/www.example.com`.
-
-```
-server {
-       listen 443 ssl;
-       listen [::]:443 ssl;
-
-	   ssl_verify_client on;
-	   ssl_client_certificate /home/user/bundle.crt;
-
-       if ($ssl_client_verify != SUCCESS) { return 403; }
-}
-```
 
 We enable the client authentication by setting the parameter `ssl_verify_client` to "on" and providing absolute path of the certificate (in PEM or CRT format) in the parameter "ssl_client_certificate".
 
 If a client does not pass the certificate then this this line of code `if ($ssl_client_verify != SUCCESS) { return 403; }` dictates the server to return a 403 (Forbidden) status code.
 
-With the above code block appeded, the virtual host file would look like below.
+The virtual host file with configuration for client authentication is as below.
 
 ```
 server {
-    listen 80;
-    server_name www.example.com;
-    return 301 https://www.example.com$request_uri;
+        listen 80;
+        server_name www.example.com;
+        return 301 https://www.example.com$request_uri;
 }
 
 server {
-       listen 443 ssl;
-       listen [::]:443 ssl;
-	   
-	   ssl on;
-	   ssl_certificate /home/user/bundle.crt;
-	   ssl_certificate_key /home/user/server.key;
-	   
-       server_name www.example.com;
-	   access_log /var/log/nginx/nginx.vhost.access.log;
-	   error_log /var/log/nginx/nginx.vhost.error.log;
-	   
-       root /var/www/www.example.com;
-       index index.html;
-	   
-       location / {
-               try_files $uri $uri/ =404;
+        listen 443 ssl;
+        listen [::]:443 ssl;
+
+        ssl on;
+        ssl_certificate /home/microsoft/sslcerts/bundle.crt;
+        ssl_certificate_key /home/microsoft/sslcerts/server.key;
+
+        ssl_verify_client on;
+        ssl_client_certificate /home/microsoft/sslcerts/client.crt;
+        if ($ssl_client_verify != SUCCESS) { return 403; }
+
+        server_name www.example.com;
+        access_log /var/log/nginx/nginx.vhost.access.log;
+        error_log /var/log/nginx/nginx.vhost.error.log;
+
+        root /var/www/www.example.com;
+        index index.html;
+
+        location / {
+                try_files $uri $uri/ =404;
        }
-}
-
-server {
-       listen 443 ssl;
-       listen [::]:443 ssl;
-
-	   ssl_verify_client on;
-	   ssl_client_certificate /home/user/bundle.crt;
-
-       if ($ssl_client_verify != SUCCESS) { return 403; }
 }
 ```
 
 Example:
 
-
+<img width="470" alt="image" src="https://github.com/hisriram96/blog/assets/56336513/1c80f9f4-a81c-42d5-a635-519350a84185">
 
 ## Verify accessing the Nginx
 
-In case of using self-signed certificate, you would see "Not Secure" as the self-signed certificate is not secure unless the root certificate is stored in the trusted CA store of the client machine. When using `curl` command to access the web site over HTTPS, use `-k` option to proceed with TLS handshake even if not secure.
+We will use the `curl` utility with options `--cert` and `--key` to send the client certificate and private key respectively. In the verbose output, we could see the `Request CERT` message indicating request from server for verifying client's certificate.
 
-<img width="672" alt="image" src="https://github.com/hisriram96/blog/assets/56336513/2a99e745-69cb-4df2-9bca-9c380e6b156f">
-
-In case the trusted CA certificate is used, you could access the custom domain without using `-k` option.
-
-<img width="612" alt="image" src="https://github.com/hisriram96/blog/assets/56336513/52320c55-b0d1-4943-b4f8-adf717a04bb9">
-
-<link rel="alternate" type="application/rss+xml"  href="{{ site.url }}/feed.xml" title="{{ site.title }}">
+<img width="1200" alt="image" src="https://github.com/hisriram96/blog/assets/56336513/4288df8e-8aab-4c2a-b7ab-83f4f27c0abe">
