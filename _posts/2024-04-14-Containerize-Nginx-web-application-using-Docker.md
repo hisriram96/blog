@@ -89,7 +89,7 @@ The `ENTRYPOINT` instruction lets us to specify the command which we want to exe
 
 Example:
 
-![alt text](image.png)
+<img width="995" alt="image" src="https://github.com/hisriram96/blog/assets/56336513/cb4be2ea-fab5-4a32-806d-58ceac44b7f7">
 
 Create the Nginx configuration file named `example.conf` with contents below. Please make sure that the `example.conf` and `examplefile.dockerfile` are in same directory.
 
@@ -133,7 +133,7 @@ docker build -f examplefile.dockerfile -t exampleimage .
 
 Example:
 
-![alt text](image-1.png)
+<img width="1180" alt="image-1" src="https://github.com/hisriram96/blog/assets/56336513/12748bf8-eda2-445e-882c-9b9ea034721c">
 
 ### Run a Docker container
 
@@ -149,12 +149,12 @@ Execute the `docker ps` command to verify if the container starts without any is
 
 Example:
 
-![alt text](image-2.png)
+<img width="1175" alt="image-2" src="https://github.com/hisriram96/blog/assets/56336513/21396ac1-b571-4e99-9c62-eb833d5c7107">
 
 ## Verify accessing the Nginx
 
-We will use the `curl` utility to verify if the web page is accessible from the host.
+We will use the `curl` utility to verify if the web page is accessible from the host. We should be able to see the "Hello World" web page which we have configured in our Nginx container.
 
-![alt text](image-3.png)
+<img width="599" alt="image-3" src="https://github.com/hisriram96/blog/assets/56336513/1d1f9262-52aa-4a9f-a06c-2cad2a80afe7">
 
-![alt text](image-4.png)
+<img width="587" alt="image-4" src="https://github.com/hisriram96/blog/assets/56336513/00b0301f-f071-43b1-9333-f12c45eb5bd3">
