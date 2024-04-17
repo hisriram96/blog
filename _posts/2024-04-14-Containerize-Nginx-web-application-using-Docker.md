@@ -93,7 +93,7 @@ Example:
 
 Create the Nginx configuration file named `example.conf` with contents below. Please make sure that the `example.conf` and `examplefile.dockerfile` are in same directory.
 
-```
+```bash
 server {
         listen 80;
         server_name www.example.com;
