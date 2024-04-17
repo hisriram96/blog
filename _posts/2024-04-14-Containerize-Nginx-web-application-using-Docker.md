@@ -159,7 +159,7 @@ We will use the `curl` utility to verify if the web page is accessible from the 
 
 <img width="587" alt="image-4" src="https://github.com/hisriram96/blog/assets/56336513/00b0301f-f071-43b1-9333-f12c45eb5bd3">
 
-## Push image to Docker Image
+## Push image to Docker Hub
 
 We have created a Docker image locally in our system so far. If we want to deploy additional containers then we need use the same image. When we build an image for enterprise applications where there are multiple teams involved then it is a must to have a central repository to store the Docker images so that authorized users could access it and use it for running containers.
 
@@ -230,3 +230,13 @@ docker pull <username>/examplerepo:1.0.0
 ```
 
 <img width="529" alt="image" src="https://github.com/hisriram96/blog/assets/56336513/eaa8cbab-7f52-48ab-9da4-cc368733b2f8">
+
+We could also run a container by using the image from the Docker Hub using the `docker run` command.
+
+```
+docker run -d <username>/examplerepo:1.0.0
+```
+
+<img width="909" alt="image" src="https://github.com/hisriram96/blog/assets/56336513/390ab132-b378-4689-8965-fdb015ab9459">
+
+> Note that running containers from a container registry like Docker Hub does `docker image pull` first and then run the container.
