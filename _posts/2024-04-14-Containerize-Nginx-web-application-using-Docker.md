@@ -158,3 +158,75 @@ We will use the `curl` utility to verify if the web page is accessible from the 
 <img width="599" alt="image-3" src="https://github.com/hisriram96/blog/assets/56336513/1d1f9262-52aa-4a9f-a06c-2cad2a80afe7">
 
 <img width="587" alt="image-4" src="https://github.com/hisriram96/blog/assets/56336513/00b0301f-f071-43b1-9333-f12c45eb5bd3">
+
+## Push image to Docker Image
+
+We have created a Docker image locally in our system so far. If we want to deploy additional containers then we need use the same image. When we build an image for enterprise applications where there are multiple teams involved then it is a must to have a central repository to store the Docker images so that authorized users could access it and use it for running containers.
+
+Docker provides a conatiner registry called as the [Docker Hub](https://docs.docker.com/docker-hub/).
+
+In this section, we will push our image to the Docker Hub and run a new container after pulling image from it.
+
+We need to [signup in Docker Hub](https://hub.docker.com/signup) to create our [personal account](https://www.docker.com/pricing/). Once we have signedup in Docker Hub, we need to create a [repository](https://docs.docker.com/docker-hub/repos/create/).
+
+Example:
+
+<img width="996" alt="image" src="https://github.com/hisriram96/blog/assets/56336513/f6cbf6ad-d8b2-4b0c-9b46-68bc16353fb6">
+
+After creating the repository in Docker Hub, we will push our image by following the steps below.
+
+1. Login to Docker Hub using `docker login` command.
+
+   <img width="1200" alt="image" src="https://github.com/hisriram96/blog/assets/56336513/3b732d05-e340-4197-9a9e-7e379a1bddb1">
+
+2. Update the tag of the image with username and name of the repository using `docker tag` command. You could also specify the tag name. The tag name indicates the specific version of the image. If the tag name is not specified then Docker will use the default tag _latest_. In our example, we have changed the image name from exampleimage to examplerepo with tag 1.0.0.
+
+   ```
+   docker tag exampleimage <username>/examplerepo:1.0.0
+   ```
+
+   <img width="497" alt="image" src="https://github.com/hisriram96/blog/assets/56336513/1b37afbb-0a27-4db7-80f3-1cb2752686b2">
+
+3. Execute the `docker push` command to push the image to Docker Hub.
+
+   ```
+   docker push <username>/examplerepo:1.0.0
+   ```
+
+   <img width="638" alt="image" src="https://github.com/hisriram96/blog/assets/56336513/ab893ab1-9604-4b97-b5c6-055816471659">
+
+We have now successfully pushed our image to Docker Hub.
+
+## Removing the container, images, and cleaning up unused data of Docker
+
+We could view the running containers in our local system using the `docker ps` command. If the command does return any output then the containers are not running and we could use `docker ps -a` command to view all containers.
+
+<img width="1199" alt="image" src="https://github.com/hisriram96/blog/assets/56336513/ef7802e3-255b-4dfa-90ab-14600610f8ab">
+
+We could view the images using `docker images` command.
+
+<img width="495" alt="image" src="https://github.com/hisriram96/blog/assets/56336513/c493c92a-b357-455d-b451-6d114a74729e">
+
+> It is worth noting that updating a tag in existing image does not change image ID for the newly tagged image.
+
+We could remove the container using the `docker rm <containername or containerid>`. Since our container `examplecontainer` is in running state, the command would fail and we need to execute `docker rm -f <containername or ID>` to remove the running container.
+
+We could remove an image using the command `docker rmi <imagename:tagname or imageid>`. If there is any container using that image then the command would fail. We would need to remove the container created using that image first then remove the image.
+
+<img width="698" alt="image" src="https://github.com/hisriram96/blog/assets/56336513/ad2f671b-9042-4729-8479-f2dcc09f495f">
+
+You could remove the unsued data which stored in cache by Docker when building images using the `docker system prune` command.
+
+<img width="348" alt="image" src="https://github.com/hisriram96/blog/assets/56336513/10682f7d-44e0-4f05-9fad-3df47748ee08">
+
+## Pull image from Docker Hub
+
+Now that we have removed the containers and images created so far and cleared cache of Docker.
+
+We could pull image from Docker Hub using the `docker pull` command. We would pull the examplerepo:1.0.0 image from Docker Hub.
+
+```
+docker pull <username>/examplerepo:1.0.0
+```
+
+<img width="529" alt="image" src="https://github.com/hisriram96/blog/assets/56336513/eaa8cbab-7f52-48ab-9da4-cc368733b2f8">
