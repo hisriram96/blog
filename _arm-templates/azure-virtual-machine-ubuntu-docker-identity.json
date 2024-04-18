@@ -135,7 +135,8 @@
             "location": "[resourceGroup().location]",
             "tags": {},
             "properties": {
-                "publicIPAllocationMethod": "Static"
+                "publicIPAllocationMethod": "Static",
+                "deleteOption": "Delete"
             },
             "sku": {
                 "name": "Standard",
@@ -254,13 +255,18 @@
                     "osDisk": {
                         "name": "[parameters('os_disk_name')]",
                         "caching": "ReadWrite",
-                        "createOption": "FromImage"
+                        "createOption": "FromImage",
+                        "deleteOption": "Delete"
                     }
                 },
                 "networkProfile": {
                     "networkInterfaces": [
                         {
-                            "id": "[resourceId('Microsoft.Network/networkInterfaces', parameters('network_interface_name'))]"
+                            "id": "[resourceId('Microsoft.Network/networkInterfaces', parameters('network_interface_name'))]",
+                            "property": {
+                                "primary": true,
+                                "deleteOption": "Delete"
+                            }
                         }
                     ]
                 },
