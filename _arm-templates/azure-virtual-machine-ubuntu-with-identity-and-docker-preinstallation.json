@@ -156,11 +156,11 @@
                             "description": "Allow Inbound SSH Traffic.",
                             "protocol": "Tcp",
                             "sourcePortRange": "*",
-                            "destinationPortRange": "200",
+                            "destinationPortRange": "22",
                             "sourceAddressPrefix": "Internet",
                             "destinationAddressPrefix": "192.168.1.4",
                             "access": "Allow",
-                            "priority": 200,
+                            "priority": 22,
                             "direction": "Inbound"
                         }
                     }
