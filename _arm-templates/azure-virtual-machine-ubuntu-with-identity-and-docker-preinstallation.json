@@ -254,11 +254,7 @@
                     "osDisk": {
                         "name": "[parameters('os_disk_name')]",
                         "caching": "ReadWrite",
-                        "createOption": "FromImage",
-                        "managedDisk": {
-                            "storageAccountType": "Standard_LRS"
-                        },
-                        "osType": "Linux"
+                        "createOption": "FromImage"
                     }
                 },
                 "networkProfile": {
