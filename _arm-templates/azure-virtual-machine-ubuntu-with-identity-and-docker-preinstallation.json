@@ -105,7 +105,7 @@
             "name": "[parameters('virtual_network_name')]",
             "type": "Microsoft.Network/virtualNetworks",
             "apiVersion": "2023-04-01",
-            "location": "[parameters('region_name')]",
+            "location": "[resourceGroup().location]",
             "tags": {},
             "dependsOn": [
                 "[resourceId('Microsoft.Network/networkSecurityGroups', parameters('network_security_group_name'))]"
@@ -132,7 +132,7 @@
             "name": "[parameters('public_ip_name')]",
             "type": "Microsoft.Network/publicIPAddresses",
             "apiVersion": "2023-04-01",
-            "location": "[parameters('region_name')]",
+            "location": "[resourceGroup().location]",
             "tags": {},
             "properties": {
                 "publicIPAllocationMethod": "Static"
@@ -146,7 +146,7 @@
             "name": "[parameters('network_security_group_name')]",
             "type": "Microsoft.Network/networkSecurityGroups",
             "apiVersion": "2023-04-01",
-            "location": "[parameters('region_name')]",
+            "location": "[resourceGroup().location]",
             "properties": {
                 "securityRules": [
                     {
@@ -170,7 +170,7 @@
             "name": "[parameters('network_interface_name')]",
             "type": "Microsoft.Network/networkInterfaces",
             "apiVersion": "2023-04-01",
-            "location": "[parameters('region_name')]",
+            "location": "[resourceGroup().location]",
             "dependsOn": [
                 "[resourceId('Microsoft.Network/publicIPAddresses', parameters('public_ip_name'))]",
                 "[resourceId('Microsoft.Network/virtualNetworks', parameters('virtual_network_name'))]"
