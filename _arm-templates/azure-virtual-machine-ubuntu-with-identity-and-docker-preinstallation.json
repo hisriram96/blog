@@ -135,8 +135,7 @@
             "location": "[resourceGroup().location]",
             "tags": {},
             "properties": {
-                "publicIPAllocationMethod": "Static",
-                "deleteOption": "Delete"
+                "publicIPAllocationMethod": "Static"
             },
             "sku": {
                 "name": "Standard",
@@ -192,9 +191,7 @@
                             }
                         }
                     }
-                ],
-				    "primary": true,
-				    "deleteOption": "Delete"
+                ]
             }
         },
         {
