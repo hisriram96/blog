@@ -258,7 +258,7 @@
                         "name": "[parameters('os_disk_name')]",
                         "caching": "ReadWrite",
                         "createOption": "FromImage",
-                        "osType": "Linux"
+                        "osType": "Linux",
 						            "deleteOption": "Delete"
                     }
                 },
