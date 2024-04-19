@@ -136,7 +136,7 @@
             "tags": {},
             "properties": {
                 "publicIPAllocationMethod": "Static",
-				"deleteOption": "Delete"
+                "deleteOption": "Delete"
             },
             "sku": {
                 "name": "Standard",
@@ -193,8 +193,8 @@
                         }
                     }
                 ],
-				"primary": true,
-				"deleteOption": "Delete"
+				    "primary": true,
+				    "deleteOption": "Delete"
             }
         },
         {
@@ -258,7 +258,8 @@
                         "name": "[parameters('os_disk_name')]",
                         "caching": "ReadWrite",
                         "createOption": "FromImage",
-						"deleteOption": "Delete"
+                        "osType": "Linux"
+						            "deleteOption": "Delete"
                     }
                 },
                 "networkProfile": {
