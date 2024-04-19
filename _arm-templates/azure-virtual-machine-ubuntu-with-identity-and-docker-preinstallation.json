@@ -243,7 +243,7 @@
                     "computerName": "[parameters('virtual_machine_name')]",
                     "adminUsername": "[parameters('username')]",
                     "adminPassword": "[parameters('password')]",
-                    "linuxConfiguration": {
+                    "Configuration": {
                         "disablePasswordAuthentication": false
                     }
                 },
@@ -258,8 +258,11 @@
                         "name": "[parameters('os_disk_name')]",
                         "caching": "ReadWrite",
                         "createOption": "FromImage",
+                        "managedDisk": {
+                            "storageAccountType": "Standard_LRS"
+                        },
                         "osType": "Linux",
-						            "deleteOption": "Delete"
+                        "deleteOption": "Delete"
                     }
                 },
                 "networkProfile": {
