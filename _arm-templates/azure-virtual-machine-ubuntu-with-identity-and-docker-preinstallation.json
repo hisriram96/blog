@@ -261,8 +261,7 @@
                         "managedDisk": {
                             "storageAccountType": "Standard_LRS"
                         },
-                        "osType": "Linux",
-                        "deleteOption": "Delete"
+                        "osType": "Linux"
                     }
                 },
                 "networkProfile": {
