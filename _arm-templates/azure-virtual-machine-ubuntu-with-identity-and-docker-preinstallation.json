@@ -136,7 +136,7 @@
             "tags": {},
             "properties": {
                 "publicIPAllocationMethod": "Static",
-                "deleteOption": "Delete"
+				"deleteOption": "Delete"
             },
             "sku": {
                 "name": "Standard",
@@ -160,7 +160,7 @@
                             "sourceAddressPrefix": "Internet",
                             "destinationAddressPrefix": "192.168.1.4",
                             "access": "Allow",
-                            "priority": 22,
+                            "priority": 220,
                             "direction": "Inbound"
                         }
                     }
@@ -192,7 +192,9 @@
                             }
                         }
                     }
-                ]
+                ],
+				"primary": true,
+				"deleteOption": "Delete"
             }
         },
         {
@@ -256,17 +258,13 @@
                         "name": "[parameters('os_disk_name')]",
                         "caching": "ReadWrite",
                         "createOption": "FromImage",
-                        "deleteOption": "Delete"
+						"deleteOption": "Delete"
                     }
                 },
                 "networkProfile": {
                     "networkInterfaces": [
                         {
-                            "id": "[resourceId('Microsoft.Network/networkInterfaces', parameters('network_interface_name'))]",
-                            "property": {
-                                "primary": true,
-                                "deleteOption": "Delete"
-                            }
+                            "id": "[resourceId('Microsoft.Network/networkInterfaces', parameters('network_interface_name'))]"
                         }
                     ]
                 },
