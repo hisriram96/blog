@@ -2,13 +2,6 @@
     "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentTemplate.json#",
     "contentVersion": "1.0.0.0",
     "parameters": {
-        "region_name": {
-            "type": "string",
-            "defaultValue": "eastus",
-            "metadata": {
-                "description": "description"
-            }
-        },
         "virtual_network_name": {
             "type": "string",
             "defaultValue": "test-vnet",
@@ -184,7 +177,10 @@
                             "privateIPAllocationMethod": "Static",
                             "privateIPAddress": "192.168.1.4",
                             "publicIPAddress": {
-                                "id": "[resourceId('Microsoft.Network/publicIPAddresses', parameters('public_ip_name'))]"
+                                "id": "[resourceId('Microsoft.Network/publicIPAddresses', parameters('public_ip_name'))]",
+                                "properties": {
+                                    "deleteOption": "Delete"
+                                }
                             },
                             "subnet": {
                                 "id": "[resourceId('Microsoft.Network/virtualNetworks/subnets', parameters('virtual_network_name'), parameters('subnet_name'))]"
@@ -198,7 +194,7 @@
             "name": "[parameters('managed_identity_name')]",
             "type": "Microsoft.ManagedIdentity/userAssignedIdentities",
             "apiVersion": "2023-01-31",
-            "location": "[parameters('region_name')]",
+            "location": "[resourceGroup().location]",
             "tags": {}
         },
         {
@@ -220,7 +216,7 @@
             "name": "[parameters('virtual_machine_name')]",
             "type": "Microsoft.Compute/virtualMachines",
             "apiVersion": "2023-03-01",
-            "location": "[parameters('region_name')]",
+            "location": "[resourceGroup().location]",
             "identity": {
                 "type": "UserAssigned",
                 "userAssignedIdentities": {
@@ -252,15 +248,24 @@
                         "version": "latest"
                     },
                     "osDisk": {
+                        "osType": "Linux",
                         "name": "[parameters('os_disk_name')]",
                         "caching": "ReadWrite",
-                        "createOption": "FromImage"
+                        "createOption": "FromImage",
+                        "managedDisk": {
+                            "storageAccountType": "Standard_LRS"
+                            },
+                        "deleteOption": "Delete"
                     }
                 },
                 "networkProfile": {
                     "networkInterfaces": [
                         {
-                            "id": "[resourceId('Microsoft.Network/networkInterfaces', parameters('network_interface_name'))]"
+                            "id": "[resourceId('Microsoft.Network/networkInterfaces', parameters('network_interface_name'))]",
+                            "properties": {
+                                "primary": true,
+                                "deleteOption": "Delete"
+                            }
                         }
                     ]
                 },
@@ -275,7 +280,7 @@
             "name": "[concat(parameters('virtual_machine_name'), '/tools')]",
             "type": "Microsoft.Compute/virtualMachines/extensions",
             "apiVersion": "2023-03-01",
-            "location": "[parameters('region_name')]",
+            "location": "[resourceGroup().location]",
             "tags": {},
             "dependsOn": [
                 "[resourceId('Microsoft.Compute/virtualMachines', parameters('virtual_machine_name'))]"
