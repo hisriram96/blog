@@ -155,6 +155,11 @@ Example:
 
 We will use the `curl` utility to verify if the web page is accessible from the host. We should be able to see the "Hello World" web page which we have configured in our Nginx container.
 
+```
+curl -v http://www.example.com --resolve www.example.com:80:127.0.0.1
+curl -kv https://www.example.com --resolve www.example.com:443:127.0.0.1
+```
+
 <img width="599" alt="image-3" src="https://github.com/hisriram96/blog/assets/56336513/1d1f9262-52aa-4a9f-a06c-2cad2a80afe7">
 
 <img width="587" alt="image-4" src="https://github.com/hisriram96/blog/assets/56336513/00b0301f-f071-43b1-9333-f12c45eb5bd3">
