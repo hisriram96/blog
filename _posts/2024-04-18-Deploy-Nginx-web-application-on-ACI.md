@@ -77,6 +77,11 @@ az container create -n "test-container" -g "test-group" --acr-identity "<resourc
 
 Once our ACI is deployed, we can  use the `curl` utility to verify if the web page is accessible using the public IP address of the ACI. We should be able to see the "Hello World" web page which we have configured in our Nginx container.
 
+```
+curl -v http://www.example.com --resolve www.example.com:80:127.0.0.1
+curl -kv https://www.example.com --resolve www.example.com:443:127.0.0.1
+```
+
 <img width="624" alt="image" src="https://github.com/hisriram96/blog/assets/56336513/f17f6ba6-9b2c-4f51-b12c-1b9c30c4c298">
 
 <img width="586" alt="image" src="https://github.com/hisriram96/blog/assets/56336513/b2bbea3f-ff0b-4ea8-8afa-340ee093eb41">
